@@ -7,6 +7,7 @@
         <field name="arch" type="xml">
             <search string="Estate Property">
                 <field name="name" />
+                <field name="property_type_id" />
                 <field name="postcode" />
                 <field name="expected_price" />
                 <field name="bedrooms" />
@@ -26,6 +27,7 @@
         <field name="arch" type="xml">
             <tree string="">
                 <field name="name" />
+                <field name="property_type_id" />
                 <field name="postcode" />
                 <field name="bedrooms" />
                 <field name="living_area" />
@@ -50,6 +52,7 @@
                     </div>
                     <group class="mb32">
                         <group>
+                            <field name="property_type_id" />
                             <field name="postcode" />
                             <field name="date_availability" />
                         </group>
@@ -70,6 +73,12 @@
                                 <field name="garden_area"/>
                                 <field name="garden_orientation"/>
                                 <field name="status"/>
+                            </group>
+                        </page>
+                        <page string="Other Info">
+                            <group>
+                                <field name="user_id" />
+                                <field name="partner_id" />
                             </group>
                         </page>
                     </notebook>
