@@ -8,6 +8,7 @@
     <record id="estate_property_actions_tree_view_id" model="ir.actions.act_window.view">
         <field name="sequence" eval="1" />
         <field name="view_mode">tree</field>
+        <field name="view_id" ref="estate_property_tree_view_tree" />
         <field name="act_window_id" ref="estate_property_actions_id" />
     </record>
 
