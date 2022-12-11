@@ -25,7 +25,7 @@
         <field name="name">estate_property_tree_view_tree</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
-            <tree string="">
+            <tree string="Estate Property" default_order="id desc">
                 <field name="name" />
                 <field name="property_type_id" />
                 <field name="postcode" />
