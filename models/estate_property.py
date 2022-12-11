@@ -66,8 +66,12 @@ class EstateProperty(models.Model):
         for record in self:
             try:
                 record.best_price = max(offer.price for offer in record.offer_ids) #get maximum price of offer
+                if record.status != 'sold' and record.status == 'new':
+                    record.status = 'offer_received'
             except:
                 record.best_price = 0
+                if record.status != 'canceled':
+                    record.status = 'new'
 
     @api.onchange('garden')
     def _onchange_garden(self):
@@ -81,7 +85,10 @@ class EstateProperty(models.Model):
     def action_property_sold(self):
         for record in self:
             if record.status != 'canceled':
-                record.status = 'sold'
+                if record.status == 'offer_accepted':
+                    record.status = 'sold'
+                else:
+                    raise UserError('Accept offer for sold properties!')
             else:
                 raise UserError('Canceled properties cannot be sold')
 
@@ -102,4 +109,5 @@ class EstateProperty(models.Model):
             expected_price = 90/100 * record.expected_price
             if record.selling_price < expected_price and record.selling_price != 0:
                 raise ValidationError("The selling price cannot be lower than 90% of the expected price!\nYou must reduce the expeted price if you want to accept this offer")
-    
+
+                

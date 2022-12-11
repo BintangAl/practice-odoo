@@ -1,5 +1,7 @@
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError
+
 import datetime
 
 class EstatePropertyOffer(models.Model):
@@ -37,20 +39,28 @@ class EstatePropertyOffer(models.Model):
 
     def action_offer_accepted(self):
         for record in self:
-            record.property_id.offer_ids.status = 'refused'
-            record.status = 'accepted'
-            record.property_id.selling_price = record.price
-            record.property_id.partner_id = record.partner_id
+            if record.property_id.status != 'canceled' and record.property_id.status != 'sold':
+                record.property_id.offer_ids.status = 'refused'
+                record.status = 'accepted'
+                record.property_id.selling_price = record.price
+                record.property_id.partner_id = record.partner_id
+                record.property_id.status = 'offer_accepted'
+            else:
+                raise UserError(record.property_id.status.capitalize() + ' properties cannot be accept offer')
 
         return True
 
     def action_offer_refused(self):
         for record in self:
-            if record.status == 'accepted':
-                record.property_id.selling_price = 0
-                record.property_id.partner_id = ''
+            if record.property_id.status != 'canceled' and record.property_id.status != 'sold':
+                if record.status == 'accepted':
+                    record.property_id.selling_price = 0
+                    record.property_id.partner_id = ''
+                    record.property_id.status = 'offer_received'
 
-            record.status = 'refused'
+                record.status = 'refused'
+            else:
+                raise UserError(record.property_id.status.capitalize() + ' properties cannot be refused offer')
 
         return True
 
