@@ -5,6 +5,17 @@
         <field name="res_model">estate.property.type</field>
     </record>
 
+    <record id="property_type_tree_view_id" model="ir.ui.view">
+        <field name="name">property_type_tree_view_id</field>
+        <field name="model">estate.property.type</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="sequence" widget="handle"/>
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+
     <record id="property_type_form_view_id" model="ir.ui.view">
         <field name="name">property_type_form_view_id</field>
         <field name="model">estate.property.type</field>
