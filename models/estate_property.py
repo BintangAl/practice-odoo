@@ -1,5 +1,6 @@
 from odoo import api, fields, models
 from odoo.exceptions import UserError
+from odoo.exceptions import ValidationError
 
 class EstateProperty(models.Model):
     _name = "estate.property"
@@ -94,4 +95,11 @@ class EstateProperty(models.Model):
                 raise UserError('Sold properties cannot be canceled')
 
         return True
+
+    @api.constrains('selling_price')
+    def _check_selling_price(self):
+        for record in self:
+            expected_price = 90/100 * record.expected_price
+            if record.selling_price < expected_price and record.selling_price != 0:
+                raise ValidationError("The selling price cannot be lower than 90% of the expected price!\nYou must reduce the expeted price if you want to accept this offer")
     

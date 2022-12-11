@@ -1,4 +1,5 @@
 from odoo import api, fields, models
+from odoo.exceptions import ValidationError
 import datetime
 
 class EstatePropertyOffer(models.Model):
@@ -52,3 +53,10 @@ class EstatePropertyOffer(models.Model):
             record.status = 'refused'
 
         return True
+
+    @api.ondelete(at_uninstall=False)
+    def _check_status(self):
+        for record in self:
+            if record.status == 'accepted':
+                record.property_id.selling_price = 0
+                record.property_id.partner_id = ''
