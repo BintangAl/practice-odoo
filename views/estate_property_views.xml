@@ -58,11 +58,11 @@
                     </div>
                     <div class="mb24">
                         <label for="tag_ids" string="Tag" class="oe_edit_only" />
-                        <field name="tag_ids" widget="many2many_tags" />
+                        <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}" />
                     </div>
                     <group class="mb32">
                         <group>
-                            <field name="property_type_id" />
+                            <field name="property_type_id" options="{'no_edit': True, 'no_create': True}" />
                             <field name="postcode" />
                             <field name="date_availability" />
                         </group>
