@@ -5,6 +5,19 @@
         <field name="res_model">estate.property.offer</field>
     </record>
 
+    <record id="property_offer_tree_view_id" model="ir.ui.view">
+        <field name="name">property_offer_tree_view_id</field>
+        <field name="model">estate.property.offer</field>
+        <field name="arch" type="xml">
+            <tree string="Property Offer">
+                <field name="price" />
+                <field name="partner_id" />
+                <field name="validity" />                            
+                <field name="date_deadline" />
+            </tree>
+        </field>
+    </record>
+
     <record id="property_offer_form_view_id" model="ir.ui.view">
         <field name="name">property_offer_form_view_id</field>
         <field name="model">estate.property.offer</field>
