@@ -74,4 +74,14 @@ class EstatePropertyOffer(models.Model):
                 record.property_id.selling_price = 0
                 record.property_id.partner_id = ''
 
+    @api.model
+    def create(self, values):
+        property_id = self.env['estate.property'].browse(values['property_id'])
+        property_id.status = 'offer_received'
+        
+        if values['price'] <= property_id.best_price:
+            raise ValidationError("The offer price cannot be lower than the best price!")
+            
+        return super(EstatePropertyOffer, self).create(values)
+        
     
