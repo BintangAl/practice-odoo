@@ -80,7 +80,7 @@ class EstatePropertyOffer(models.Model):
         property_id.status = 'offer_received'
         
         if values['price'] <= property_id.best_price:
-            raise ValidationError("The offer price cannot be lower than the best price!")
+            raise ValidationError("The offer must be higher than " + str(property_id.best_price))
             
         return super(EstatePropertyOffer, self).create(values)
         
