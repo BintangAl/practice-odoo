@@ -66,8 +66,8 @@ class EstateProperty(models.Model):
         for record in self:
             try:
                 record.best_price = max(offer.price for offer in record.offer_ids) #get maximum price of offer
-                if record.status != 'sold' and record.status == 'new':
-                    record.status = 'offer_received'
+                # if record.status != 'sold' and record.status == 'new':
+                #     record.status = 'offer_received'
             except:
                 record.best_price = 0
                 if record.status != 'canceled':
@@ -110,4 +110,10 @@ class EstateProperty(models.Model):
             if record.selling_price < expected_price and record.selling_price != 0:
                 raise ValidationError("The selling price cannot be lower than 90% of the expected price!\nYou must reduce the expeted price if you want to accept this offer")
 
+    @api.ondelete(at_uninstall=False)
+    def prevent_deletion(self):
+        for record in self:
+            if record.status not in ('new', 'canceled'):
+                raise ValidationError("Cannot delete property " + record.status.replace('_',' ') + "!")
+                
                 

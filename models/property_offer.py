@@ -20,6 +20,7 @@ class EstatePropertyOffer(models.Model):
         'estate.property',
         string='Property',
         required=True,
+        ondelete='cascade'
     )
     validity = fields.Integer(string="Validity (days)", default=7)
     date_deadline = fields.Date(string="Deadline", compute="_compute_date_deadline", inverse="_inverse_date_deadline")
@@ -72,3 +73,5 @@ class EstatePropertyOffer(models.Model):
             if record.status == 'accepted':
                 record.property_id.selling_price = 0
                 record.property_id.partner_id = ''
+
+    
