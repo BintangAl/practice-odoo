@@ -8,6 +8,7 @@
     # data files always loaded at installation
     'data': [
         'security/ir.model.access.csv',
+        'views/res_users_views.xml',
         'views/property_offer_action.xml',
         'views/property_tag_action.xml',
         'views/property_type_action.xml',
