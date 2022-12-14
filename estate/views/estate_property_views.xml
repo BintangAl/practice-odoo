@@ -44,7 +44,7 @@
         <field name="name">estate_property_kanban_view_id</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
-            <kanban>
+            <kanban default_group_by="property_type_id" records_draggable="0">
                 <field name="status" />
                 <templates>
                     <t t-name="kanban-box">
