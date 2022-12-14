@@ -2,7 +2,7 @@
 <odoo>
 
     <record id="estate_property_search_view_id" model="ir.ui.view">
-        <field name="name">estate_property_search_view_id</field>
+        <field name="name">estate_property_search_view_name</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
             <search string="Estate Property">
@@ -22,7 +22,7 @@
     </record>
 
     <record id="estate_property_tree_view_id" model="ir.ui.view">
-        <field name="name">estate_property_tree_view_id</field>
+        <field name="name">estate_property_tree_view_name</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
             <tree string="Estate Property" default_order="id desc" decoration-success="status in ('offer_received', 'offer_accepted')" decoration-bf="status=='offer_accepted'" decoration-muted="status=='sold'" decoration-danger="status=='canceled'">
@@ -41,7 +41,7 @@
     </record>
 
     <record id="estate_property_kanban_view_id" model="ir.ui.view">
-        <field name="name">estate_property_kanban_view_id</field>
+        <field name="name">estate_property_kanban_view_name</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
             <kanban default_group_by="property_type_id" records_draggable="0">
@@ -72,7 +72,7 @@
     </record>
 
     <record id="estate_property_form_view_id" model="ir.ui.view">
-        <field name="name">estate_property_form_view_id</field>
+        <field name="name">estate_property_form_view_name</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
             <form string="Estate Property">

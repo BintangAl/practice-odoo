@@ -1,6 +1,5 @@
 from odoo import api, fields, models
-from odoo.exceptions import ValidationError
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError 
 
 import datetime
 
@@ -67,16 +66,8 @@ class EstatePropertyOffer(models.Model):
 
         return True
 
-    @api.ondelete(at_uninstall=False)
-    def _check_status(self):
-        for record in self:
-            if record.status == 'accepted':
-                record.property_id.selling_price = 0
-                record.property_id.partner_id = ''
-
     @api.model
     def create(self, values):
-        print(len(self))
         property_id = self.env['estate.property'].browse(values['property_id'])
         property_id.status = 'offer_received'
         
@@ -84,11 +75,5 @@ class EstatePropertyOffer(models.Model):
             raise ValidationError("The offer must be higher than " + str(property_id.best_price))
             
         return super(EstatePropertyOffer, self).create(values)
-
-    @api.ondelete(at_uninstall=False)
-    def delete_offer(self):
-        for record in self:
-            print('Tryyyyyyy')
-            print(len(record))
         
     

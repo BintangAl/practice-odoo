@@ -1,6 +1,5 @@
 from odoo import api, fields, models
-from odoo.exceptions import UserError
-from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError, ValidationError 
 
 class EstateProperty(models.Model):
     _name = "estate.property"
@@ -64,7 +63,10 @@ class EstateProperty(models.Model):
     @api.depends('offer_ids.price')
     def _compute_best_price(self):
         for record in self:
-            record.best_price = max((offer.price for offer in record.offer_ids), default=0) #get maximum price of offer
+            best_price = max((offer.price for offer in record.offer_ids), default=0) #get maximum price of offer
+            record.best_price = best_price
+            if best_price == 0:
+                record.status = "new"
 
     @api.onchange('garden')
     def _onchange_garden(self):
