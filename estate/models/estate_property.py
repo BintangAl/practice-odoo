@@ -64,14 +64,7 @@ class EstateProperty(models.Model):
     @api.depends('offer_ids.price')
     def _compute_best_price(self):
         for record in self:
-            try:
-                record.best_price = max(offer.price for offer in record.offer_ids) #get maximum price of offer
-                # if record.status != 'sold' and record.status == 'new':
-                #     record.status = 'offer_received'
-            except:
-                record.best_price = 0
-                if record.status != 'canceled':
-                    record.status = 'new'
+            record.best_price = max((offer.price for offer in record.offer_ids), default=0) #get maximum price of offer
 
     @api.onchange('garden')
     def _onchange_garden(self):
