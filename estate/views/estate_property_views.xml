@@ -21,8 +21,8 @@
         </field>
     </record>
 
-    <record id="estate_property_tree_view_tree" model="ir.ui.view">
-        <field name="name">estate_property_tree_view_tree</field>
+    <record id="estate_property_tree_view_id" model="ir.ui.view">
+        <field name="name">estate_property_tree_view_id</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
             <tree string="Estate Property" default_order="id desc" decoration-success="status in ('offer_received', 'offer_accepted')" decoration-bf="status=='offer_accepted'" decoration-muted="status=='sold'" decoration-danger="status=='canceled'">
@@ -37,6 +37,37 @@
                 <field name="date_availability" optional="hide" />
                 <field name="status" invisible="1" />
             </tree>
+        </field>
+    </record>
+
+    <record id="estate_property_kanban_view_id" model="ir.ui.view">
+        <field name="name">estate_property_kanban_view_id</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="status" />
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="oe_kanban_title">
+                                <strong>
+                                    <field name="name" />
+                                </strong>
+                            </div>
+                           <div>
+                                Expeted Price : <field name="expected_price" />
+                            </div>
+                            <div t-if="record.status.raw_value == 'offer_received'">
+                                Best Offer : <field name="best_price" />
+                            </div>
+                            <div t-if="record.status.raw_value == 'offer_accepted'">
+                                Seling Price : <field name="selling_price" />
+                            </div>
+                            <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
         </field>
     </record>
 
