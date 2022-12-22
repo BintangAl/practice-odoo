@@ -3,11 +3,12 @@
     'version': '1.0',
     'depends': ['base'],
     'author': "Admin",
-    'category': 'Sales',
+    'category': 'Real Estate/Brokerage',
     'description': "",
     # data files always loaded at installation
     'data': [
         'security/ir.model.access.csv',
+        'security/security.xml',
         'views/res_users_views.xml',
         'views/property_offer_views.xml',
         'views/property_tag_views.xml',
