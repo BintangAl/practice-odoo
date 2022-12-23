@@ -16,9 +16,13 @@
         'views/estate_property_views.xml',
         'views/estate_property_action.xml',
         'views/estate_menus.xml',
+        'data/estate.property.type.csv',
+        'demo/demo_data.xml'
     ],
     # data files containing optionally loaded demonstration data
-    'demo': [],
+    'demo': [
+        'demo/demo_data.xml',
+    ],
     'installable': True,
     'application': True,
     'auto_install': False
