@@ -66,8 +66,8 @@ class EstateProperty(models.Model):
         for record in self:
             best_price = max((offer.price for offer in record.offer_ids), default=0) #get maximum price of offer
             record.best_price = best_price
-            if best_price == 0:
-                record.status = "new"
+            # if best_price == 0:
+            #     record.status = "new"
 
     @api.onchange('garden')
     def _onchange_garden(self):
@@ -81,10 +81,13 @@ class EstateProperty(models.Model):
     def action_property_sold(self):
         for record in self:
             if record.status != 'canceled':
-                if record.status == 'offer_accepted':
-                    record.status = 'sold'
+                if record.offer_ids:
+                    if record.status == 'offer_accepted':
+                        record.status = 'sold'
+                    else:
+                        raise UserError('Accept offer for sold properties!')
                 else:
-                    raise UserError('Accept offer for sold properties!')
+                    raise UserError('Add offer for sold properties!')
             else:
                 raise UserError('Canceled properties cannot be sold')
 
