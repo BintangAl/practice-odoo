@@ -1,8 +1,8 @@
 id,name
-type_1,House
-type_2,Apartemen
-type_3,Residential
-type_4,Commercial
-type_5,Industrial
-type_6,Land
+property_house,House
+property_apartemen,Apartemen
+property_residential,Residential
+property_commercial,Commercial
+property_industrial,Industrial
+property_land,Land
 
