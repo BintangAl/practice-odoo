@@ -15,7 +15,7 @@
             <field name="facades">4</field>
             <field name="garage">True</field>
             <field name="garden_area">100000</field>
-            <field name="garden_orientation">south</field>
+            <field name="garden_orientation">S</field>
             <field name="property_type_id" ref="estate.type_3" />
         </record>
 
@@ -36,7 +36,7 @@
 
         <record id="property_3" model="estate.property">
             <field name="name">Villa</field>
-            <field name="status">new</field>
+            <field name="status">offer_received</field>
             <field name="description">A nice and villa</field>
             <field name="postcode">23456</field>
             <field name="date_availability">2022-02-02</field>
@@ -46,7 +46,7 @@
             <field name="facades">2</field>
             <field name="garage">True</field>
             <field name="garden_area">10000</field>
-            <field name="garden_orientation">east</field>
+            <field name="garden_orientation">E</field>
             <field name="property_type_id" ref="estate.type_3" />
             <field name="offer_ids" eval="[
                 Command.create({
@@ -60,6 +60,21 @@
                     'validity' : 14 
                 }),
             ]"/>
+        </record>
+
+        <record id="property_4" model="estate.property">
+            <field name="name">New Home</field>
+            <field name="status">new</field>
+            <field name="postcode">23456</field>
+            <field name="date_availability">2022-12-12</field>
+            <field name="expected_price">1000000</field>
+            <field name="bedrooms">3</field>
+            <field name="living_area">50</field>
+            <field name="facades">2</field>
+            <field name="garage">True</field>
+            <field name="garden_area">100</field>
+            <field name="garden_orientation">E</field>
+            <field name="property_type_id" ref="estate.type_1" />
         </record>
     
         <record id="offer_1" model="estate.property.offer">
@@ -85,6 +100,10 @@
 
         <function model="estate.property.offer" name="action_offer_accepted">
             <value eval="[ref('offer_3')]" />
+        </function>
+        
+        <function model="estate.property" name="action_property_sold">
+            <value eval="[ref('property_1')]" />
         </function>
     </data>
 

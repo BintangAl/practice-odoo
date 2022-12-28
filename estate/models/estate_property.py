@@ -20,10 +20,10 @@ class EstateProperty(models.Model):
     garden_orientation = fields.Selection(
         string = 'Garden Orientation', 
         selection = [
-            ('north', 'North'), 
-            ('south', 'South'), 
-            ('east', 'East'), 
-            ('west', 'West')
+            ('N', 'North'), 
+            ('S', 'South'), 
+            ('E', 'East'), 
+            ('W', 'West')
         ], 
         help="Orientation is used to indicate the position of the Park"
     )
@@ -66,17 +66,15 @@ class EstateProperty(models.Model):
         for record in self:
             best_price = max((offer.price for offer in record.offer_ids), default=0) #get maximum price of offer
             record.best_price = best_price
-            # if best_price == 0:
-            #     record.status = "new"
 
     @api.onchange('garden')
     def _onchange_garden(self):
         if self.garden:
             self.garden_area = 10
-            self.garden_orientation = 'north'
+            self.garden_orientation = 'N'
         else:
             self.garden_area = 0
-            self.garden_orientation = ''
+            self.garden_orientation = False
 
     def action_property_sold(self):
         for record in self:
