@@ -6,7 +6,9 @@
     'category': 'Sales',
     'description': "",
     # data files always loaded at installation
-    'data': [],
+    'data': [
+        'report/estate_property_templates.xml'
+    ],
     # data files containing optionally loaded demonstration data
     'demo': [],
     'installable': True,
